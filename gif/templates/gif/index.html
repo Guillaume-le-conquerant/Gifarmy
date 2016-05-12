@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{% if latest_gif_list %}
+	<ul>
+	{% for gif in latest_gif_list %}
+		<li><img src="{{ gif.url }}"></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>Pas de gif disponible.</p>
+{% endif %}
+
+<a href="post_gif">Poster un gif</a>
+
+</body>
+</html>
