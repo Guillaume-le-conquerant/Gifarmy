@@ -1,5 +1,5 @@
-<form action="" method="post">
+<form action="" method="post">{% csrf_token %}
   URL du GIF:
-  <br><input type="text" name="gif"><br>
+  <br><input type="text" name="gif_url"><br>
   <button type="submit">Envoyer</button>
 </form>

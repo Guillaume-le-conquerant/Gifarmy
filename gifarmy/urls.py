@@ -18,7 +18,7 @@ from django.contrib import admin
 from gif import views
 
 urlpatterns = [
-	url(r'^post_gif/$', views.post_gif, name='post_gif'),
+	url(r'^poster-gif/$', views.post_gif, name='post_gif'),
 	url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
 ]
