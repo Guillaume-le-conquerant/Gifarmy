@@ -1,5 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from .forms import UserForm
+from django.contrib.auth import login
+from django.shortcuts import render
 
 from .models import Gif
 
@@ -32,3 +35,16 @@ def post_gif(request):
             # Si, pour une raison ou une autre, le GIF n'a pas été ajouté à la table,
             # On envoie ce message d'erreur pour avertir l'utilisateur :
             return HttpResponse('Failed to add this GIF', request)
+
+def lexusadduser(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            new_user = User.objects.create_user(**form.cleaned_data)
+            login(new_user)
+            # redirect, or however you want to get to the main view
+            return HttpResponseRedirect('index.html')
+    else:
+        form = UserForm() 
+
+    return render(request, 'create_account.html', {'form': form}) 
