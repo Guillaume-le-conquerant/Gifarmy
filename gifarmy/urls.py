@@ -21,5 +21,5 @@ urlpatterns = [
 	url(r'^poster-gif/$', views.post_gif, name='post_gif'),
 	url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
-    url(r'^creer-compte/$', views.lexusadduser, name='create_account')
+    url(r'^creer-compte/$', views.add_user, name='add_user')
 ]

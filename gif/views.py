@@ -5,6 +5,7 @@ from django.contrib.auth import login
 from django.shortcuts import render
 
 from .models import Gif
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -36,15 +37,17 @@ def post_gif(request):
             # On envoie ce message d'erreur pour avertir l'utilisateur :
             return HttpResponse('Failed to add this GIF', request)
 
-def lexusadduser(request):
+
+def add_user(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
             new_user = User.objects.create_user(**form.cleaned_data)
-            login(new_user)
+            login(request, new_user)
             # redirect, or however you want to get to the main view
-            return HttpResponseRedirect('index.html')
+            return HttpResponseRedirect('/')
     else:
-        form = UserForm() 
-
-    return render(request, 'create_account.html', {'form': form}) 
+        form = UserForm()
+    template = loader.get_template('gif/create_account.html')
+    context = {'form': form}
+    return HttpResponse(template.render(context, request))
